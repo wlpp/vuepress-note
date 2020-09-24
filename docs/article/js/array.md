@@ -16,7 +16,6 @@ Array.isArray("foobar"); // false
 ```js
 // 常规
 Array.from('123') // [1,2,3]
-[...'123']
 
 // 去重后转为数组
 Array.from(new Set([4,5,6])) // [4,5,6]
@@ -101,14 +100,6 @@ console.log(arr2); // [1, 4, 2, 3]
 [1, 2, 3].includes(2); // true
 ```
 
-## flat
-
-> 将所有元素遍历到同一个数组中
-
-```js
-[1, 2, 3, [4, 5]].flat(); // [1, 2, 3, 4, 5]
-```
-
 ## reverse
 
 > 返回了一个颠倒后的数组
@@ -123,8 +114,8 @@ console.log(arr2); // [1, 4, 2, 3]
 
 ```js
 let arr = [1, 2, 3];
-arr.every(item => item > 0); // true
-arr.every(item => item > 1); // false
+arr.every((item) => item > 0); // true
+arr.every((item) => item > 1); // false
 ```
 
 ## map
@@ -132,7 +123,7 @@ arr.every(item => item > 1); // false
 > 遍历数组,返回新数组
 
 ```js
-[1, 2, 3].map(item => item); // 1,2,3
+[1, 2, 3].map((item) => item); // 1,2,3
 ```
 
 ## forEach
@@ -141,7 +132,7 @@ arr.every(item => item > 1); // false
 
 ```js
 lis = document.querySelectorAll("li");
-lis.forEach(item => item); // <li></li>
+lis.forEach((item) => item); // <li></li>
 ```
 
 ## filter
@@ -149,7 +140,7 @@ lis.forEach(item => item); // <li></li>
 > 过滤数组，返回符合条件的元素
 
 ```js
-[1, 2, 3].filter(item => item > 1); // [2,3]
+[1, 2, 3].filter((item) => item > 1); // [2,3]
 ```
 
 ## find
@@ -157,7 +148,7 @@ lis.forEach(item => item); // <li></li>
 > 返回第一个符合条件的元素
 
 ```js
-[1, 2, 3].find(item => item > 1); // 2
+[1, 2, 3].find((item) => item > 1); // 2
 ```
 
 ## findIndex
@@ -165,7 +156,7 @@ lis.forEach(item => item); // <li></li>
 > 返回第一个符合条件的元素的索引
 
 ```js
-[1, 2, 3].findIndex(item => item > 1); // 1
+[1, 2, 3].findIndex((item) => item > 1); // 1
 ```
 
 ## sort
@@ -178,22 +169,22 @@ let arr = [1, 2, 3, 5, 7, 6, 9, 8];
 arr.sort();
 // 快速乱序
 arr = arr.sort(() => {
-  return Math.random() - 0.5; 
+  return Math.random() - 0.5;
 });
 // 指定某种排序:a-b从小到大,b-a则相反
 let arr2 = [
   {
     title: "111",
-    num: 18
+    num: 18,
   },
   {
     title: "111",
-    num: 33
+    num: 33,
   },
   {
     title: "111",
-    num: 888
-  }
+    num: 888,
+  },
 ];
 arr2.sort((a, b) => b.num - a.num); // [{title: "111", num: 888},{title: "111", num: 33},{title: "111", num: 18}]
 ```
@@ -224,4 +215,17 @@ let nameNum = names.reduce((pre, cur) => {
   return pre;
 }, {}); // 传{}默认第一个pre为{}
 console.log(nameNum); // {Alice: 2, Bob: 1, Tiff: 1, Bruce: 1}
+```
+
+## flat
+
+> 将多维数组转化为一维数组
+
+```js
+let arr1 = [1, 2, [3, 4]];
+let arr2 = [1, 2, 3, 4, 5, [6, 7, 8, [9, 10, 11, 12, [13, 14, 15, 16]]]];
+
+//[]的个数代表几维
+arr1.flat(); // [1,2,3,4]
+arr2.flat(3); // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
 ```

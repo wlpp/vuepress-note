@@ -16,11 +16,11 @@ handleScrollTop(){
 
 ```js
 handleScrollBottom() {
-    let scrollTop =document.documentElement.scrollTop || document.body.scrollTop; 
+    let scrollTop =document.documentElement.scrollTop || document.body.scrollTop;
     var windowHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
     // let windowHeight = window.innerHeight
     let scrollHeight =document.documentElement.scrollHeight || document.body.scrollHeight;
-    
+
     // 滚动条的总高度等于scrollHeight-windowHeight
     if (scrollTop + windowHeight == scrollHeight) {
     //请求数据接口
@@ -58,6 +58,7 @@ handleScrollDirection(){
   });
 }
 ```
+
 ::: warning 滑动时控制台报错
 添加样式 body{touch-action: pan-y;}
 :::
@@ -65,6 +66,7 @@ handleScrollDirection(){
 ## 滚动到指定位置
 
 > 整个页面滚动
+
 ```js
 scrollAppoint(ele){
     element = document.querySelector(`#${ele}`)
@@ -74,7 +76,14 @@ scrollAppoint(ele){
 }
 ```
 
+::: tip 其他方式
+
+- document.querySelector(`element`).scrollIntoView({ behavior: "smooth" }); // smooth 滚动动画，auto 默认不滚动
+- this.$nextTick(()=>{this.$refs.DOM.scrollTo(0,380)});
+  :::
+
 > 局部滚动
+
 ```js
 scrollAppoint(ele){
     element = document.querySelector(`#${ele}`)
@@ -84,4 +93,46 @@ scrollAppoint(ele){
 }
 ```
 
+## 判别滚动区域
 
+```html
+<style>
+  .box {
+    width: 100%;
+    height: 500px;
+    background: skyblue;
+    margin-bottom: 20px;
+    font-size: 35px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 500px;
+  }
+</style>
+<div class="box">1</div>
+<div class="box">2</div>
+<div class="box">3</div>
+<div class="box">4</div>
+<div class="box">5</div>
+<script>
+  window.addEventListener("scroll", function() {
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+    var boxs = document.querySelectorAll(".box");
+    boxs.forEach((item, index) => {
+      if (scrollTop >= boxs[index].offsetTop && scrollTop < boxs[index + 1].offsetTop) {
+        boxs.forEach((item2) => (item2.style.backgroundColor = "skyblue"));
+        item.style.backgroundColor = "#ff0000";
+      }
+    });
+  });
+</script>
+```
+
+## 多次滚动卡顿处理
+
+```js
+let timer = null;
+clearTimeout(timer);
+timer = setTimeout(function() {
+  // 执行事件方法
+});
+```

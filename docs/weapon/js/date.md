@@ -43,20 +43,28 @@ getDaysDiffBetweenDates(new Date("2017-12-13"), new Date("2017-12-22")); // 9
 ## 时间戳 => 天-时-分-秒
 
 ```js
-const formatDuration = ms => {
+const formatDuration = (ms) => {
   if (ms < 0) ms = -ms;
   const time = {
     day: Math.floor(ms / 86400000),
     hour: Math.floor(ms / 3600000) % 24,
     minute: Math.floor(ms / 60000) % 60,
     second: Math.floor(ms / 1000) % 60,
-    millisecond: Math.floor(ms) % 1000
+    millisecond: Math.floor(ms) % 1000,
   };
   return Object.entries(time)
-    .filter(val => val[1] !== 0)
+    .filter((val) => val[1] !== 0)
     .map(([key, val]) => `${val} ${key}${val !== 1 ? "s" : ""}`)
     .join(", ");
 };
 
 formatDuration(3161012); // 52 minutes, 41 seconds, 12 milliseconds
+```
+
+## 日期时间转换
+
+```js
+// 2010-01-01 12:30:30 和 2020-06-18T08:27:53.176Z(后台返回)
+Date.parse("2010-01-01 12:30:30"); //具体时间转时间轴
+new Date(Date.parse("2010-01-01 12:30:30")).toLocaleString(); //时间轴转具体时间
 ```

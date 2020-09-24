@@ -86,6 +86,7 @@ module.exports = {
           children: [
             "js/jsonp",
             "js/storage",
+            "js/array",
             "js/play",
             "js/facility",
             "js/date",
@@ -104,7 +105,8 @@ module.exports = {
             "css/base",
             "css/flexible",
             "css/gird",
-            "css/popup"
+            "css/popup",
+            "css/sticky",
           ]
         },
         {

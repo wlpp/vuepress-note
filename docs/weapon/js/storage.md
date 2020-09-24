@@ -40,16 +40,15 @@ setCookie("wlpp", "666", 0.1);
 
 ```js
 function getCookie(key) {
-  var cookieArr = document.cookie.split("; ");
-  for (var i = 0; i < cookieArr.length; i++) {
-    var arr = cookieArr[i].split("=");
-    if (arr[0] === key) {
+  let cookieArr = document.cookie.split("; ");
+ cookieArr.map((item, index) => {
+    let arr = cookieArr[i].split("=");
+    if (arr[0].trim() === key) {
       console.log("匹配成功");
-      // return arr[1];
-      break; //终止循环
+      console.log(arr[1]);
+      return;
     }
   }
-  console.log("匹配不成功");
   return false;
 }
 
@@ -70,9 +69,10 @@ deleteCookie("wlpp");
 ```
 
 :::tip chrome 浏览器显示 cookie
+
 1. 访问 chrome://flags/#site-isolation-trial-opt-out
 
 2. 选择 Opt-out
 
 3. 点击右下角重启浏览
-:::
+   :::
